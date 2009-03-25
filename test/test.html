@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Testing delayed mousemove plugin</title>
+		<style type="text/css" media="screen">
+			#test1 { width: 250px; height: 250px; background: #ccc; }
+			#test2 { margin-top: 10px; width: 250px; height: 250px; background: #ccc; }
+			#log1 { position: absolute; top: 10px; left: 275px; width: 500px; height: 250px; overflow: auto; }
+			#log2 { position: absolute; top: 270px; left: 275px; width: 500px; height: 250px; overflow: auto; }
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+		<script type="text/javascript" src="../jquery.mousemove.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(function() {
+				$('#test1').bind('mousemove', function(event) {
+					log1('move event fired with these options: { behavior: "throttle", delay: 100 }');
+				});
+				$('#test2').bind('mousemove', { behavior: 'debounce' }, function(event) {
+					log2('move event fired with these options: { behavior: "debounce", delay: 100 }');
+				});
+				
+				function log1(msg) { log('#log1', msg); };
+				function log2(msg) { log('#log2', msg); };
+				function log(id, msg) { $(id).append(msg+'<br>').scrollTop(99999); };
+			});
+		</script>
+	</head>
+	<body>
+		<div id="test1">Throttle test</div>
+		<div id="test2">Debounce test</div>
+		<div id="log1"></div>
+		<div id="log2"></div>
+	</body>
+</html>
