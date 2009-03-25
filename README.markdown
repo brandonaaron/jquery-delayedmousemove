@@ -6,7 +6,7 @@ To configure the event use the data argument of the bind method like this.
 
 	$('div').bind('mousemove', { behavior: 'debounce', delay: 250 }, fn);
 
-The default behavior is 'throttle' and the default delay is 100.
+The default behavior is 'throttle' and the default delay is 100. These settings apply to all future mousemove event handlers bound to the specific element. In other words the event is configureable per an element.
 
 Inspiration for this plugin comes from [this article on debouncing in JavaScript](http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/) by [John Hann](http://unscriptable.com/index.php/about/).
 
