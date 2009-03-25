@@ -18,7 +18,6 @@ $.event.special.mousemove = {
 			elem.addEventListener('mousemove', handler, false);
 		else if ( elem.attachEvent )
 			elem.attachEvent('onmousemove', handler);
-		return true;
 	},
 	
 	teardown: function(data, namespaces) {
@@ -28,7 +27,6 @@ $.event.special.mousemove = {
 			elem.removeEventListener('mousemove', handler, false);
 		else if ( elem.detachEvent )
 			elem.detachEvent('onmousemove', handler);
-		return true;
 	}
 };
 
@@ -48,9 +46,8 @@ function delayedHandler(fn, behavior, delay) {
 };
 
 function actualHandler(event) {
-	var args = [].slice.call( arguments, 1 );
-	args.unshift($.event.fix(event || window.event));
-	return $.event.handle.apply(this, args);
+	arguments[0] = jQuery.event.fix( event || window.event );
+	return $.event.handle.apply(this, arguments);
 };
 
 })(jQuery);
