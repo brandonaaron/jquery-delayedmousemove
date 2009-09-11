@@ -33,9 +33,9 @@ $.event.special.mousemove = {
 function delayedHandler(fn, behavior, delay) {
 	var timeout, scope = this;
 	return function() {
-		var args = arguments;
+		var event = $.event.fix( arguments[0] || window.event );
 		function delayed() {
-			fn.apply(scope, args);
+			fn.call(scope, event);
 			timeout = null;
 		};
 		if ( behavior === "debounce" && timeout )
@@ -46,7 +46,6 @@ function delayedHandler(fn, behavior, delay) {
 };
 
 function actualHandler(event) {
-	arguments[0] = jQuery.event.fix( event || window.event );
 	return $.event.handle.apply(this, arguments);
 };
 
